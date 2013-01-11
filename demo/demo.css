@@ -7,40 +7,6 @@ html, body {
 
 /*
 
-  Trigger
-
-*/
-#tooltip-trigger {
-  height: 28px;
-  left: 50%;
-  line-height: 28px;
-  margin: -14px 0 0 -55px;
-  overflow: hidden;
-  position: absolute;
-  top: 50%;
-  width: 110px;
-}
-
-#tooltip-trigger > span {
-  background: #00a447;
-  color: white;
-  cursor: pointer;
-  display: block;
-  font-size: 14px;
-  height: 100%;
-  text-align: center;
-
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-
-#tooltip-trigger .tooltip-data {
-  display: none;
-}
-
-
-/*
-
   Tooltip
 
 */
@@ -51,8 +17,8 @@ html, body {
 }
 
 .tooltip .content {
-  background: #004d34;
-  color: #9adabe;
+  background: #111;
+  color: white;
   font-size: 13px;
   padding: 14px 16px 13px;
 }
@@ -60,11 +26,64 @@ html, body {
 .tooltip .arrow {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid #004d34;
+  border-top: 6px solid #111;
   bottom: 0;
   height: 0;
   left: 50%;
   margin-left: -6px;
   position: absolute;
   width: 0;
+}
+
+.tooltip.aqua .content { background: #004c3d; color: #86d4c2 }
+.tooltip.aqua .arrow { border-top-color: #004c3d }
+
+.tooltip.purple .content { background: #4a0356; color: #be96be }
+.tooltip.purple .arrow { border-top-color: #4a0356 }
+
+
+/*
+
+  Trigger
+
+*/
+#tooltip-triggers {
+  height: 80px;
+  left: 50%;
+  line-height: 28px;
+  margin: -40px 0 0 -40px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  width: 80px;
+}
+
+#tooltip-triggers > div {
+  color: white;
+  color: rgba(255, 255, 255, 0.875);
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-size: 11px;
+  height: 40px;
+  line-height: 44px;
+  overflow: hidden;
+  text-align: center;
+  width: 40px;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+#tooltip-triggers .a { background: #65cbb7 }
+#tooltip-triggers .b { background: #00af8c }
+#tooltip-triggers .c { background: #a477ad }
+#tooltip-triggers .d { background: #8e5198 }
+
+#tooltip-triggers > div > span {
+  display: block;
+  height: 100%;
+}
+
+#tooltip-triggers .tooltip-data {
+  display: none;
 }

@@ -1,19 +1,9 @@
 (function() {
 
-  window.bare_tooltip_instances = [];
-
   // show tooltip on hover
-  $(".has-tooltip").each(function() {
-    window.bare_tooltip_instances.push(
-      new BareTooltip(this)
-    );
-  });
+  var t = new BareTooltip($(".has-tooltip"));
 
   // show tooltip on click
-  $(".has-tooltip-on-click").each(function() {
-    window.bare_tooltip_instances.push(
-      new BareTooltip(this, { trigger_type: "click" })
-    );
-  });
+  var tc = new BareTooltip($(".has-tooltip-on-click"), { trigger_type: "click" });
 
 }());
