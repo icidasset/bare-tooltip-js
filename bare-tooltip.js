@@ -30,11 +30,10 @@ root.BareTooltip = (function($) {
 
 
   /**************************************
-   *  State object
+   *  State (instance.state)
    */
-  BT.prototype.state = {
-    // $tooltip_element
-  };
+  // $tooltip_element
+  // $current_trigger
 
 
 
@@ -48,6 +47,9 @@ root.BareTooltip = (function($) {
       this.settings = {};
       $.extend(this.settings, original_settings, settings);
     }
+
+    // state object
+    this.state = {};
 
     // bind to self
     this.bind_to_self([
@@ -160,6 +162,9 @@ root.BareTooltip = (function($) {
       this.hide_and_remove_tooltip();
     }
 
+    // current trigger
+    this.state.$current_trigger = $trigger;
+
     // make new tooltip
     this.new_tooltip(content, add_classes);
   };
@@ -190,14 +195,18 @@ root.BareTooltip = (function($) {
 
 
   BT.prototype.trigger_click_handler = function(e) {
-    if (!this.state.$tooltip_element) {
+    var setup_new = function() {
       this.setup_tooltip(e.currentTarget);
       this.move_tooltip(e);
       this.show_tooltip();
+    };
 
-    } else {
+    if (this.state.$current_trigger) {
+      var current_trigger = this.state.$current_trigger[0];
       this.hide_and_remove_tooltip();
-
+      if (current_trigger !== e.currentTarget) setup_new.call(this);
+    } else {
+      setup_new.call(this);
     }
   };
 
@@ -233,6 +242,7 @@ root.BareTooltip = (function($) {
 
   BT.prototype.hide_and_remove_tooltip = function() {
     var self = this, $tooltip = self.state.$tooltip_element;
+    self.state.$current_trigger = null;
     self.state.$tooltip_element = null;
     $tooltip.animate(
       { opacity: 0 }, {

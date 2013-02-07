@@ -35,11 +35,14 @@ html, body {
   width: 0;
 }
 
-.tooltip.aqua .content { background: #004c3d; color: #86d4c2 }
-.tooltip.aqua .arrow { border-top-color: #004c3d }
+.tooltip.green .content { background: #335c2a; color: #aadd9c }
+.tooltip.green .arrow { border-top-color: #335c2a }
 
 .tooltip.purple .content { background: #4a0356; color: #be96be }
 .tooltip.purple .arrow { border-top-color: #4a0356 }
+
+.tooltip.red .content { background: #6c0816; color: #f47575 }
+.tooltip.red .arrow { border-top-color: #6c0816 }
 
 
 /*
@@ -48,14 +51,18 @@ html, body {
 
 */
 #tooltip-triggers {
-  height: 80px;
+  height: 120px;
   left: 50%;
   line-height: 28px;
-  margin: -40px 0 0 -40px;
+  margin: -60px 0 0 -40px;
   overflow: hidden;
   position: absolute;
   top: 50%;
   width: 80px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 #tooltip-triggers > div {
@@ -70,14 +77,14 @@ html, body {
   overflow: hidden;
   text-align: center;
   width: 40px;
-
-  -webkit-font-smoothing: antialiased;
 }
 
-#tooltip-triggers .a { background: #65cbb7 }
-#tooltip-triggers .b { background: #00af8c }
+#tooltip-triggers .a { background: #90d485 }
+#tooltip-triggers .b { background: #39be48 }
 #tooltip-triggers .c { background: #a477ad }
 #tooltip-triggers .d { background: #8e5198 }
+#tooltip-triggers .e { background: #f14d52 }
+#tooltip-triggers .f { background: #cc0026 }
 
 #tooltip-triggers > div > span {
   display: block;
