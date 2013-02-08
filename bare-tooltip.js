@@ -10,22 +10,20 @@ root.BareTooltip = (function($) {
     return function() { return fn.apply(me, arguments); };
   };
 
+  var default_template = '<div class="{{CLASSES}}">' +
+    '<div class="content">{{CONTENT}}</div>' +
+    '<div class="arrow"></div>' +
+  '</div>';
+
   /**************************************
    *  Default settings
    */
   BT.prototype.settings = {
     trigger_type: "hover",
     tooltip_klass: "tooltip",
-    animation_speed: 350
+    animation_speed: 350,
+    template: default_template
   };
-
-
-  BT.prototype.tooltip_template = (function() {
-    return  '<div class="{{CLASSES}}">' +
-              '<div class="content">{{CONTENT}}</div>' +
-              '<div class="arrow"></div>' +
-            '</div>';
-  })();
 
 
 
@@ -103,7 +101,7 @@ root.BareTooltip = (function($) {
     klasses.unshift(this.settings.tooltip_klass);
 
     // html
-    h = this.tooltip_template;
+    h = this.settings.template;
     h = h.replace("{{CLASSES}}", klasses.join(" "));
     h = h.replace("{{CONTENT}}", content);
 

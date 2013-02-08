@@ -68,7 +68,6 @@ html, body {
 #tooltip-triggers > div {
   color: white;
   color: rgba(255, 255, 255, 0.875);
-  cursor: pointer;
   display: block;
   float: left;
   font-size: 11px;
@@ -85,6 +84,11 @@ html, body {
 #tooltip-triggers .d { background: #8e5198 }
 #tooltip-triggers .e { background: #f14d52 }
 #tooltip-triggers .f { background: #cc0026 }
+
+#tooltip-triggers .c,
+#tooltip-triggers .d,
+#tooltip-triggers .e,
+#tooltip-triggers .f { cursor: pointer }
 
 #tooltip-triggers > div > span {
   display: block;

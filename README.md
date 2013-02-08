@@ -3,10 +3,19 @@
 Basic tooltip plugin in javascript.
 
 
-## Template
+## Settings
 
 ```javascript
-instance.tooltip_template
+// with defaults
+
+trigger_type = "hover"; // or "click";
+tooltip_klass = "tooltip"; // tooltip element css class
+animation_speed = 350; // opacity transition duration, etc.
+
+template = '<div class="{{CLASSES}}">' +
+  '<div class="content">{{CONTENT}}</div>' +
+  '<div class="arrow"></div>' +
+'</div>';
 ```
 
 
