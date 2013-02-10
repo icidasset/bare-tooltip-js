@@ -16,6 +16,18 @@ For example, say you have two trigger elements with 'click' as trigger type.
 If you click on the first trigger and then second, then the first tooltip
 will disappear. Check the demo for a real example.
 
+### How to add data
+
+- child element with the class 'tooltip-data'
+- element next to self (trigger) with the class 'tooltip-data'
+- 'data-tooltip' attribute
+- 'title' attribute
+
+### Other ways to add css classes
+
+You can set the attribute 'data-tooltip-classes' on the element(s) and
+their parents to provide extra css classes.
+
 
 ## Settings
 

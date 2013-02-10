@@ -275,21 +275,20 @@ root.BareTooltip = (function($) {
 
   BT.prototype.show_tooltip = function() {
     this.state.$tooltip_element.animate({ opacity: 1 }, this.settings.animation_speed);
-    if (this.settings.hide_on_document_click && this.settings.trigger_type == "click") this.set_timeout_for_document_click();
+    if (this.should_hide_on_document_click()) this.set_timeout_for_document_click();
   };
 
 
   BT.prototype.hide_tooltip = function(callback) {
-    var self = this, $tooltip = self.state.$tooltip_element;
+    var $tooltip = this.state.$tooltip_element;
     if (!$tooltip) return;
 
     this.state.$current_trigger = null;
     this.state.$tooltip_element = null;
     $tooltip.animate({ opacity: 0 }, {
-        duration: this.settings.animation_speed,
-        complete: function() { callback.call(self, $tooltip); }
-      }
-    );
+      duration: this.settings.animation_speed,
+      complete: function() { callback($tooltip); }
+    });
   };
 
 
@@ -299,7 +298,7 @@ root.BareTooltip = (function($) {
 
 
   BT.prototype.hide_and_remove_tooltip = function() {
-    if (this.settings.hide_on_document_click) {
+    if (this.should_hide_on_document_click()) {
       $(document).off("click", this.hide_and_remove_tooltip);
     }
 
@@ -376,6 +375,11 @@ root.BareTooltip = (function($) {
 
   BT.prototype.should_timeout = function() {
     return ((this.settings.trigger_type == "click") && this.settings.timeout_duration) ? true : false;
+  };
+
+
+  BT.prototype.should_hide_on_document_click = function() {
+    return ((this.settings.trigger_type == "click") && this.settings.hide_on_document_click) ? true : false;
   };
 
 
