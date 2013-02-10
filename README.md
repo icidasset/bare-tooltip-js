@@ -24,6 +24,8 @@ will disappear. Check the demo for a real example.
 trigger_type = "hover"; // or "click";
 tooltip_klass = "tooltip"; // tooltip element css class
 animation_speed = 350; // opacity transition duration, etc.
+timeout_duration = 0; // duration in ms, 0 to disable
+hide_on_document_click = true; // or false. Uses $(elem).one()
 
 template = '<div class="{{CLASSES}}">' +
   '<div class="content">{{CONTENT}}</div>' +
@@ -34,8 +36,6 @@ template = '<div class="{{CLASSES}}">' +
 
 ## To do
 
-- split 'hide_and_remove' function into 'hide' and 'remove'
-- Implement optional 'hide on timeout' for 'has-tooltip-on-click'
 - Add 'extensibility' piece to readme
 - Browser testing
 - Alternate demo with jQuery
