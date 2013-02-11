@@ -50,4 +50,3 @@ template = '<div class="{{CLASSES}}">' +
 
 - Add 'extensibility' piece to readme
 - Browser testing
-- Alternate demo with jQuery

@@ -65,7 +65,8 @@ html, body {
   -ms-user-select: none;
 }
 
-#tooltip-triggers > div {
+#tooltip-triggers .has-tooltip,
+#tooltip-triggers .has-tooltip-on-click {
   color: white;
   color: rgba(255, 255, 255, 0.875);
   display: block;

@@ -74,7 +74,7 @@ root.BareTooltip = (function($) {
       } else {
         return $(element);
       }
-    }());
+    })();
 
     // further setup
     this.setup();
@@ -255,18 +255,19 @@ root.BareTooltip = (function($) {
   //
   BT.prototype.move_tooltip = function(e) {
     var $t = this.state.$tooltip_element,
-        $trigger = $(e.currentTarget);
+        $trigger = $(e.currentTarget),
+        height = $.fn.jquery ? $t.outerHeight(true) : $t.height();
 
     if (this.settings.trigger_type == "click") {
       $t.css({
         left: $trigger.offset().left + Math.round($trigger.width() / 2) - Math.round($t.width() / 2),
-        top: $trigger.offset().top - $t.height() - 5
+        top: $trigger.offset().top - height - 5
       });
 
     } else {
       $t.css({
         left: e.pageX - ($t.width() / 2),
-        top: e.pageY - $t.height() - 18
+        top: e.pageY - height - 18
       });
 
     }
@@ -389,4 +390,4 @@ root.BareTooltip = (function($) {
   //
   return BT;
 
-})(Zepto);
+})(window.Zepto || window.jQuery);
