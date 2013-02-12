@@ -142,11 +142,13 @@ root.BareTooltip = (function($) {
 
     // set content
     content = (function() {
+      var $next = $trigger.next(".tooltip-data");
+
       if ($trigger.children(".tooltip-data").length) {
         return $trigger.children(".tooltip-data").html();
 
-      } else if ($trigger.next(".tooltip-data").length) {
-        return $trigger.next(".tooltip-data").html();
+      } else if ($next.length && $next.hasClass("tooltip-data")) {
+        return $next.html();
 
       } else if ($trigger.attr("data-tooltip")) {
         return $trigger.attr("data-tooltip");

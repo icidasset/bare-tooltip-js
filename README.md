@@ -48,5 +48,6 @@ template = '<div class="{{CLASSES}}">' +
 
 ## To do
 
+- a 'get_content' function
 - Add 'extensibility' piece to readme
 - Browser testing
