@@ -11,7 +11,7 @@ var instance = new BareTooltip(element, optional_settings);
 // or a jQuery/Zepto object
 
 instance.setup();
-// seperated because in favor of easy customization
+// seperated because it allows easier customization
 // however, there is the 'setup_immediately' setting
 ```
 
