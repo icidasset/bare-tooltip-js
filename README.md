@@ -9,6 +9,8 @@ Basic tooltip plugin written in js with prototypes for easy customization.
 var instance = new BareTooltip(element, optional_settings);
 // where element could be either a regular DOM element
 // or a jQuery/Zepto object
+
+instance.setup();
 ```
 
 If you provide a jQuery/Zepto object, you can link multiple triggers.

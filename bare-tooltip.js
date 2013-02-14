@@ -1,7 +1,7 @@
 /*
 
     BARE TOOLTIP
-    v0.2
+    v0.2.1
 
 */
 
@@ -54,7 +54,24 @@ root.BareTooltip = (function($) {
     this.state = {};
     $.extend(this.state, BT.prototype.state);
 
-    // bind to self
+    // cache element
+    this.$el = (function() {
+      if (element instanceof $) {
+        return element;
+      } else if ($.isArray(element)) {
+        return element;
+      } else {
+        return $(element);
+      }
+    })();
+  }
+
+
+
+  //
+  //  Setup
+  //
+  BT.prototype.setup = function() {
     this.bind_to_self([
       "trigger_mouseover_handler",
       "trigger_mouseout_handler",
@@ -66,27 +83,7 @@ root.BareTooltip = (function($) {
       "hide_and_remove_current_tooltip"
     ]);
 
-    // cache element
-    this.$el = (function() {
-      if (element instanceof $) {
-        return element;
-      } else if ($.isArray(element)) {
-        return element;
-      } else {
-        return $(element);
-      }
-    })();
-
-    // further setup
-    this.setup();
-  }
-
-
-
-  //
-  //  Setup
-  //
-  BT.prototype.setup = function() {
+    // bind events
     switch (this.settings.trigger_type) {
       case "hover":
         this.$el.on("mouseover", this.trigger_mouseover_handler);
