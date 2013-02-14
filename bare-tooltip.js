@@ -26,7 +26,8 @@ root.BareTooltip = (function($) {
     animation_speed: 350,
     timeout_duration: 0,
     hide_on_document_click: true,
-    template: default_template
+    template: default_template,
+    setup_immediately: false
   };
 
 
@@ -64,6 +65,9 @@ root.BareTooltip = (function($) {
         return $(element);
       }
     })();
+
+    // setup?
+    if (this.settings.setup_immediately) this.setup();
   }
 
 

@@ -3,8 +3,7 @@
   var tooltip, tooltip_cd, tooltip_ef, $cd, $ef;
 
   // show tooltip on hover
-  tooltip = new BareTooltip($(".has-tooltip"));
-  tooltip.setup();
+  tooltip = new BareTooltip($(".has-tooltip"), { setup_immediately: true });
 
   // show tooltip on click
   $cd = $(".has-tooltip-on-click").filter(".c, .d");
