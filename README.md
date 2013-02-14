@@ -11,6 +11,8 @@ var instance = new BareTooltip(element, optional_settings);
 // or a jQuery/Zepto object
 
 instance.setup();
+// seperated because in favor of easy customization
+// however, there is the 'setup_immediately' setting
 ```
 
 If you provide a jQuery/Zepto object, you can link multiple triggers.
