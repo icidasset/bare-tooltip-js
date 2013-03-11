@@ -33,6 +33,11 @@ You can set the attribute 'data-tooltip-classes' on the element(s) and
 their parents to provide extra css classes.
 
 
+## Dependencies
+
+- jQuery or Zepto
+
+
 ## Settings
 
 ```javascript
