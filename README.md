@@ -3,6 +3,11 @@
 Basic tooltip plugin written in js with prototypes for easy customization.
 
 
+## Dependencies
+
+- jQuery or Zepto
+
+
 ## How to use
 
 ```javascript
@@ -31,11 +36,6 @@ will disappear. Check the demo for a real example.
 
 You can set the attribute 'data-tooltip-classes' on the element(s) and
 their parents to provide extra css classes.
-
-
-## Dependencies
-
-- jQuery or Zepto
 
 
 ## Settings
