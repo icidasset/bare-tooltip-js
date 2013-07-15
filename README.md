@@ -48,6 +48,7 @@ animation_speed = 350; // opacity transition duration, etc.
 timeout_duration = 0; // duration in ms, 0 to disable
 hide_on_document_click = true; // or false. Uses $(elem).one()
 setup_immediately = false; // or true; setup = context and event binding
+delegate_selector = false; // if present, then used as delegation selector
 
 template = '<div class="{{CLASSES}}">' +
   '<div class="content">{{CONTENT}}</div>' +

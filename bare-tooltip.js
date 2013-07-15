@@ -28,7 +28,7 @@ root.BareTooltip = (function($) {
     hide_on_document_click: true,
     template: default_template,
     setup_immediately: false,
-    delegateSelector: false
+    delegate_selector: false
   };
 
 
