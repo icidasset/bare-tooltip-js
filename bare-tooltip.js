@@ -1,7 +1,7 @@
 /*
 
     BARE TOOLTIP
-    v0.2.1
+    v0.2.2
 
 */
 
@@ -27,7 +27,8 @@ root.BareTooltip = (function($) {
     timeout_duration: 0,
     hide_on_document_click: true,
     template: default_template,
-    setup_immediately: false
+    setup_immediately: false,
+    delegateSelector: false
   };
 
 
@@ -90,11 +91,20 @@ root.BareTooltip = (function($) {
     // bind events
     switch (this.settings.trigger_type) {
       case "hover":
-        this.$el.on("mouseover", this.trigger_mouseover_handler);
-        this.$el.on("mouseout", this.trigger_mouseout_handler);
+        if (this.settings.delegate_selector) {
+          this.$el.on("mouseover", this.settings.delegate_selector, this.trigger_mouseover_handler);
+          this.$el.on("mouseout", this.settings.delegate_selector, this.trigger_mouseout_handler);
+        } else {
+          this.$el.on("mouseover", this.trigger_mouseover_handler);
+          this.$el.on("mouseout", this.trigger_mouseout_handler);
+        }
         break;
       case "click":
-        this.$el.on("click", this.trigger_click_handler);
+        if (this.settings.delegate_selector) {
+          this.$el.on("click", this.settings.delegate_selector, this.trigger_click_handler);
+        } else {
+          this.$el.on("click", this.trigger_click_handler);
+        }
         break;
       default:
         console.error("Invalid BareTooltip trigger type");
@@ -256,7 +266,7 @@ root.BareTooltip = (function($) {
 
     if (this.state.$current_trigger) {
       var current_trigger = this.state.$current_trigger[0];
-      if (!this.settings.hide_on_document_click) this.hide_and_remove_current_tooltip();
+      this.hide_and_remove_current_tooltip();
       if (current_trigger !== e.currentTarget) setup_new.call(this);
 
     } else {
@@ -419,6 +429,40 @@ root.BareTooltip = (function($) {
 
   BT.prototype.should_hide_on_document_click = function() {
     return ((this.settings.trigger_type == "click") && this.settings.hide_on_document_click) ? true : false;
+  };
+
+
+
+  //
+  //  Self destruct
+  //
+  BT.prototype.self_destruct = function() {
+    if (this.state.$tooltip_element) {
+      this.remove_tooltip(this.state.$tooltip_element.get(0));
+    }
+
+    // unbind events
+    switch (this.settings.trigger_type) {
+      case "hover":
+        if (this.settings.delegate_selector) {
+          this.$el.off("mouseover", this.settings.delegate_selector, this.trigger_mouseover_handler);
+          this.$el.off("mouseout", this.settings.delegate_selector, this.trigger_mouseout_handler);
+        } else {
+          this.$el.off("mouseover", this.trigger_mouseover_handler);
+          this.$el.off("mouseout", this.trigger_mouseout_handler);
+        }
+        break;
+      case "click":
+        if (this.settings.delegate_selector) {
+          this.$el.off("click", this.settings.delegate_selector, this.trigger_click_handler);
+        } else {
+          this.$el.off("click", this.trigger_click_handler);
+        }
+        break;
+    }
+
+    // other
+    this.$el = null;
   };
 
 
