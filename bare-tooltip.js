@@ -358,7 +358,7 @@ root.BareTooltip = (function($) {
     var $tooltip = this.state.$tooltip_element;
     if (!$tooltip) return;
     var self = this, tooltip = $tooltip.get(0);
-    var callback = function() { self.remove_tooltip(tooltip); };
+    var callback = function() { self.remove_tooltip(tooltip); tooltip = null; };
     self.hide_tooltip(tooltip, callback);
   };
 
