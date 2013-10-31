@@ -1,7 +1,7 @@
 /*
 
     BARE TOOLTIP
-    v0.2.2
+    v0.2.3
 
 */
 
@@ -28,7 +28,8 @@ root.BareTooltip = (function($) {
     hide_on_document_click: true,
     template: default_template,
     setup_immediately: false,
-    delegate_selector: false
+    delegate_selector: false,
+    tooltip_data: false
   };
 
 
@@ -106,6 +107,13 @@ root.BareTooltip = (function($) {
           this.$el.on("click", this.trigger_click_handler);
         }
         break;
+      case "contextmenu":
+        if (this.settings.delegate_selector) {
+          this.$el.on("contextmenu", this.settings.delegate_selector, this.trigger_click_handler);
+        } else {
+          this.$el.on("contextmenu", this.trigger_click_handler);
+        }
+        break;
       default:
         console.error("Invalid BareTooltip trigger type");
         return;
@@ -142,7 +150,10 @@ root.BareTooltip = (function($) {
         $next = $trigger.next(".tooltip-data");
 
     // find content
-    if ($trigger.children(".tooltip-data").length) {
+    if (this.settings.tooltip_data) {
+      return this.settings.tooltip_data;
+
+    } else if ($trigger.children(".tooltip-data").length) {
       return $trigger.children(".tooltip-data").html();
 
     } else if ($next.length && $next.hasClass("tooltip-data")) {
@@ -273,6 +284,8 @@ root.BareTooltip = (function($) {
       setup_new.call(this);
 
     }
+
+    return false;
   };
 
 
@@ -294,16 +307,16 @@ root.BareTooltip = (function($) {
         $trigger = $(e.currentTarget),
         height = $.fn.jquery ? $t.outerHeight(true) : $t.height();
 
-    if (this.settings.trigger_type == "click") {
+    if (this.settings.trigger_type == "hover") {
       $t.css({
-        left: $trigger.offset().left + Math.round($trigger.width() / 2) - Math.round($t.width() / 2),
-        top: $trigger.offset().top - height - 5
+        left: e.pageX - ($t.width() / 2),
+        top: e.pageY - height - 18
       });
 
     } else {
       $t.css({
-        left: e.pageX - ($t.width() / 2),
-        top: e.pageY - height - 18
+        left: $trigger.offset().left + Math.round($trigger.width() / 2) - Math.round($t.width() / 2),
+        top: $trigger.offset().top - height - 5
       });
 
     }
@@ -423,12 +436,12 @@ root.BareTooltip = (function($) {
 
 
   BT.prototype.should_timeout = function() {
-    return ((this.settings.trigger_type == "click") && this.settings.timeout_duration) ? true : false;
+    return ((this.settings.trigger_type != "hover") && this.settings.timeout_duration) ? true : false;
   };
 
 
   BT.prototype.should_hide_on_document_click = function() {
-    return ((this.settings.trigger_type == "click") && this.settings.hide_on_document_click) ? true : false;
+    return ((this.settings.trigger_type != "hover") && this.settings.hide_on_document_click) ? true : false;
   };
 
 
