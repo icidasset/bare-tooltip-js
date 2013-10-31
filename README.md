@@ -27,6 +27,7 @@ will disappear. Check the demo for a real example.
 
 ### How to add data
 
+- tooltip_data setting (html or function which returns html)
 - child element with the class 'tooltip-data'
 - element next to self (trigger) with the class 'tooltip-data'
 - 'data-tooltip' attribute
@@ -49,6 +50,7 @@ timeout_duration = 0; // duration in ms, 0 to disable
 hide_on_document_click = true; // or false. Uses $(elem).one()
 setup_immediately = false; // or true; setup = context and event binding
 delegate_selector = false; // if present, then used as delegation selector
+tooltip_data = false; // tooltip {{CONTENT}} html option (can also be function)
 
 template = '<div class="{{CLASSES}}">' +
   '<div class="content">{{CONTENT}}</div>' +

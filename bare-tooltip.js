@@ -151,7 +151,11 @@ root.BareTooltip = (function($) {
 
     // find content
     if (this.settings.tooltip_data) {
-      return this.settings.tooltip_data;
+      if (this.is_function(this.settings.tooltip_data)) {
+        return this.settings.tooltip_data();
+      } else {
+        return this.settings.tooltip_data;
+      }
 
     } else if ($trigger.children(".tooltip-data").length) {
       return $trigger.children(".tooltip-data").html();
@@ -442,6 +446,12 @@ root.BareTooltip = (function($) {
 
   BT.prototype.should_hide_on_document_click = function() {
     return ((this.settings.trigger_type != "hover") && this.settings.hide_on_document_click) ? true : false;
+  };
+
+
+  BT.prototype.is_function = function(fn) {
+    var get_type = {};
+    return (fn && get_type.toString.call(fn) === "[object Function]");
   };
 
 
