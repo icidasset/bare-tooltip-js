@@ -62,4 +62,3 @@ template = '<div class="{{CLASSES}}">' +
 ## To do
 
 - Add 'extensibility' piece to readme
-- Browser testing
