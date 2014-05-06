@@ -1,0 +1,26 @@
+{
+  "name": "bare-tooltip-js",
+  "version": "0.2.4",
+  "homepage": "https://github.com/icidasset/bare-tooltip-js",
+  "authors": [
+    "Steven Vandevelde <icid.asset@gmail.com>"
+  ],
+  "description": "Basic tooltip plugin written in js with prototypes for easy customization.",
+  "main": "bare-tooltip.js",
+  "keywords": [
+    "tooltip",
+    "jquery",
+    "zepto",
+    "custom",
+    "customization",
+    "prototype"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -9,8 +9,8 @@
   $cd = $(".has-tooltip-on-click").filter(".c, .d");
   $ef = $(".has-tooltip-on-click").filter(".e, .f");
 
-  tooltip_cd = new BareTooltip($cd, { trigger_type: "click" });
-  tooltip_ef = new BareTooltip($ef, { trigger_type: "click", timeout_duration: 1000 });
+  tooltip_cd = new BareTooltip($cd, { trigger_type: "click", timeout_duration: 1000 });
+  tooltip_ef = new BareTooltip($ef, { trigger_type: "contextmenu", timeout_duration: 1000 });
 
   tooltip_cd.setup();
   tooltip_ef.setup();

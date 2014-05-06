@@ -1,12 +1,16 @@
 /*
 
     BARE TOOLTIP
-    v0.2.3
+    v0.2.4
 
 */
 
-var root = window;
-root.BareTooltip = (function($) {
+(function() {
+
+"use strict";
+
+
+window.BareTooltip = (function($) {
   var __bind = function(fn, me) {
     return function() { return fn.apply(me, arguments); };
   };
@@ -15,6 +19,34 @@ root.BareTooltip = (function($) {
     '<div class="content">{{CONTENT}}</div>' +
     '<div class="arrow"></div>' +
   '</div>';
+
+
+  //
+  //  Constructor
+  //
+  function BT(element, settings) {
+    this.settings = {};
+    $.extend(this.settings, BT.prototype.settings, settings || {});
+
+    // state object
+    this.state = {};
+    $.extend(this.state, BT.prototype.state);
+
+    // cache element
+    this.$el = (function() {
+      if (element instanceof $) {
+        return element;
+      } else if ($.isArray(element)) {
+        return element;
+      } else {
+        return $(element);
+      }
+    })();
+
+    // setup?
+    if (this.settings.setup_immediately) this.setup();
+  }
+
 
 
   //
@@ -43,34 +75,6 @@ root.BareTooltip = (function($) {
 
     timeout_ids: []
   };
-
-
-
-  //
-  //  Constructor
-  //
-  function BT(element, settings) {
-    this.settings = {};
-    $.extend(this.settings, BT.prototype.settings, settings || {});
-
-    // state object
-    this.state = {};
-    $.extend(this.state, BT.prototype.state);
-
-    // cache element
-    this.$el = (function() {
-      if (element instanceof $) {
-        return element;
-      } else if ($.isArray(element)) {
-        return element;
-      } else {
-        return $(element);
-      }
-    })();
-
-    // setup?
-    if (this.settings.setup_immediately) this.setup();
-  }
 
 
 
@@ -177,9 +181,10 @@ root.BareTooltip = (function($) {
 
 
   BT.prototype.get_tooltip_additional_classes = function(trigger) {
-    var $trigger = $(trigger),
-        attr_name = "data-tooltip-classes",
-        add_classes = [];
+    var attr_name = "data-tooltip-classes",
+        add_classes = [],
+        $trigger = $(trigger),
+        $add;
 
     // get trigger parent elements
     $add = $trigger.parents("[" + attr_name + "]");
@@ -385,8 +390,8 @@ root.BareTooltip = (function($) {
   //  Timeouts
   //
   BT.prototype.clear_timeouts = function() {
-    array = this.state.timeout_ids;
-    array_clone = array.slice(0);
+    var array = this.state.timeout_ids;
+    var array_clone = array.slice(0);
 
     // loop and clear
     $.each(array_clone, function(idx, timeout_id) {
@@ -495,4 +500,5 @@ root.BareTooltip = (function($) {
   //
   return BT;
 
-})(window.Zepto || window.jQuery);
+}(window.Zepto || window.jQuery));
+}());
