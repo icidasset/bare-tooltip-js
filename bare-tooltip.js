@@ -1,7 +1,7 @@
 /*
 
     BARE TOOLTIP
-    v0.2.4
+    v0.2.5
 
 */
 
@@ -61,7 +61,8 @@ window.BareTooltip = (function($) {
     template: default_template,
     setup_immediately: false,
     delegate_selector: false,
-    tooltip_data: false
+    tooltip_data: false,
+    append_to_element: document.body
   };
 
 
@@ -233,7 +234,7 @@ window.BareTooltip = (function($) {
     $(window).on("resize", this.window_resize_handler);
 
     // add to dom
-    $("body").append($tooltip);
+    $(this.settings.append_to_element).append($tooltip);
   };
 
 

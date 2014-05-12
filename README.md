@@ -51,6 +51,7 @@ hide_on_document_click = true; // or false. Uses $(elem).one()
 setup_immediately = false; // or true; setup = context and event binding
 delegate_selector = false; // if present, then used as delegation selector
 tooltip_data = false; // tooltip {{CONTENT}} html option (can also be function)
+append_to_element = document.body // the tooltip will be appended to this element
 
 template = '<div class="{{CLASSES}}">' +
   '<div class="content">{{CONTENT}}</div>' +
