@@ -1,7 +1,7 @@
 /*
 
     BARE TOOLTIP
-    v0.2.5
+    v0.2.6
 
 */
 
@@ -84,10 +84,10 @@ window.BareTooltip = (function($) {
   //
   BT.prototype.setup = function() {
     this.bind_to_self([
-      "trigger_mouseover_handler",
-      "trigger_mouseout_handler",
-      "trigger_mouseover_for_timeout_handler",
-      "trigger_mouseout_for_timeout_handler",
+      "trigger_mouseenter_handler",
+      "trigger_mouseleave_handler",
+      "trigger_mouseenter_for_timeout_handler",
+      "trigger_mouseleave_for_timeout_handler",
       "trigger_click_handler",
       "window_resize_handler",
       "move_tooltip",
@@ -98,11 +98,11 @@ window.BareTooltip = (function($) {
     switch (this.settings.trigger_type) {
       case "hover":
         if (this.settings.delegate_selector) {
-          this.$el.on("mouseover", this.settings.delegate_selector, this.trigger_mouseover_handler);
-          this.$el.on("mouseout", this.settings.delegate_selector, this.trigger_mouseout_handler);
+          this.$el.on("mouseenter", this.settings.delegate_selector, this.trigger_mouseenter_handler);
+          this.$el.on("mouseleave", this.settings.delegate_selector, this.trigger_mouseleave_handler);
         } else {
-          this.$el.on("mouseover", this.trigger_mouseover_handler);
-          this.$el.on("mouseout", this.trigger_mouseout_handler);
+          this.$el.on("mouseenter", this.trigger_mouseenter_handler);
+          this.$el.on("mouseleave", this.trigger_mouseleave_handler);
         }
         break;
       case "click":
@@ -138,8 +138,8 @@ window.BareTooltip = (function($) {
     this.state.$current_trigger = $(trigger);
 
     if (this.should_timeout()) {
-      this.state.$current_trigger.on("mouseover", this.trigger_mouseover_for_timeout_handler);
-      this.state.$current_trigger.on("mouseout", this.trigger_mouseout_for_timeout_handler);
+      this.state.$current_trigger.on("mouseenter", this.trigger_mouseenter_for_timeout_handler);
+      this.state.$current_trigger.on("mouseleave", this.trigger_mouseleave_for_timeout_handler);
     }
 
     // make new tooltip
@@ -226,8 +226,8 @@ window.BareTooltip = (function($) {
 
     // timeout related events
     if (this.should_timeout()) {
-      $tooltip.on("mouseover", this.trigger_mouseover_for_timeout_handler);
-      $tooltip.on("mouseout", this.trigger_mouseout_for_timeout_handler);
+      $tooltip.on("mouseenter", this.trigger_mouseenter_for_timeout_handler);
+      $tooltip.on("mouseleave", this.trigger_mouseleave_for_timeout_handler);
     }
 
     // window resize event
@@ -243,7 +243,7 @@ window.BareTooltip = (function($) {
   //  Main event handlers
   //    -> trigger_type: hover
   //
-  BT.prototype.trigger_mouseover_handler = function(e) {
+  BT.prototype.trigger_mouseenter_handler = function(e) {
     this.assign_new_tooltip(e.currentTarget);
 
     // move tooltip
@@ -255,7 +255,7 @@ window.BareTooltip = (function($) {
   };
 
 
-  BT.prototype.trigger_mouseout_handler = function(e) {
+  BT.prototype.trigger_mouseleave_handler = function(e) {
     $(e.currentTarget).off("mousemove", this.move_tooltip);
 
     // hide and remove
@@ -268,12 +268,12 @@ window.BareTooltip = (function($) {
   //  Main event handlers
   //    -> trigger_type: click
   //
-  BT.prototype.trigger_mouseover_for_timeout_handler = function() {
+  BT.prototype.trigger_mouseenter_for_timeout_handler = function() {
     this.clear_timeouts();
   };
 
 
-  BT.prototype.trigger_mouseout_for_timeout_handler = function() {
+  BT.prototype.trigger_mouseleave_for_timeout_handler = function() {
     this.set_timeout_for_removal();
   };
 
@@ -348,10 +348,10 @@ window.BareTooltip = (function($) {
     }
 
     if (this.should_timeout()) {
-      this.state.$current_trigger.off("mouseover", this.trigger_mouseover_for_timeout_handler);
-      this.state.$current_trigger.off("mouseout", this.trigger_mouseout_for_timeout_handler);
-      this.state.$tooltip_element.off("mouseover");
-      this.state.$tooltip_element.off("mouseout");
+      this.state.$current_trigger.off("mouseenter", this.trigger_mouseenter_for_timeout_handler);
+      this.state.$current_trigger.off("mouseleave", this.trigger_mouseleave_for_timeout_handler);
+      this.state.$tooltip_element.off("mouseenter");
+      this.state.$tooltip_element.off("mouseleave");
     }
 
     // clear timeouts
@@ -474,11 +474,11 @@ window.BareTooltip = (function($) {
     switch (this.settings.trigger_type) {
       case "hover":
         if (this.settings.delegate_selector) {
-          this.$el.off("mouseover", this.settings.delegate_selector, this.trigger_mouseover_handler);
-          this.$el.off("mouseout", this.settings.delegate_selector, this.trigger_mouseout_handler);
+          this.$el.off("mouseenter", this.settings.delegate_selector, this.trigger_mouseenter_handler);
+          this.$el.off("mouseleave", this.settings.delegate_selector, this.trigger_mouseleave_handler);
         } else {
-          this.$el.off("mouseover", this.trigger_mouseover_handler);
-          this.$el.off("mouseout", this.trigger_mouseout_handler);
+          this.$el.off("mouseenter", this.trigger_mouseenter_handler);
+          this.$el.off("mouseleave", this.trigger_mouseleave_handler);
         }
         break;
       case "click":
